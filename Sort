@@ -1,0 +1,26 @@
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.Collator;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
+public class Sort{
+        void sortATextFile(String fileName, String toFileName) throws IOException {
+            Path path = Paths.get(fileName);
+            Charset charset = Charset.forName("UTF-8");
+            List<String> lines =Files.readAllLines(path, charset);
+            Collator trCollator = Collator.getInstance(new Locale("tr","TR"));
+            Collections.sort(lines, trCollator);
+            Path toPath = Paths.get(toFileName);
+            Files.write(toPath,lines,charset);
+        }
+        public static void main(String []args) throws IOException {
+            new Sort().sortATextFile("C:\\Users\\asus\\Desktop\\LocaleSensitiveSort-master\\friends.txt", "C:\\Users\\asus\\Desktop\\LocaleSensitiveSort-master\\sorted.txt");
+
+        }
+    }
